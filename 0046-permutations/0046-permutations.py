@@ -3,11 +3,34 @@ import itertools
 
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
+        length = len(nums)
+        arr=[0]*length
+        visited=[0]*length
+        res =[]
+        def permutation(level):
+            if level == length:
+                # print(arr)
+                res.append(arr.copy())
+                return
+            
+            for i in range(length):
+                if visited[i]: continue
+                visited[i]=1
+                arr[level]=nums[i]
+                permutation(level+1)
+                arr[level]=0
+                visited[i]=0
+        permutation(0)
+        return res
+        
+        
+'''
         res = []
         for x in itertools.permutations(nums, len(nums)):
             print(list(x))
             res.append(list(x))
         return res
+'''
 
 '''
         #순열이란 모든 가능한 경우의 수를 그래프 형태로 나열한 결과라고 할 수 있다.
